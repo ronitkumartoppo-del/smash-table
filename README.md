@@ -1,15 +1,25 @@
 # Smash Table
 
-Low-poly physics knockdown prototype. Aim the cannon, knock every prop off the table.
+Low-poly physics knockdown prototype.
 
-**Play:** open [index.html](index.html) in Chrome.
+## This GitHub page is NOT the game
+
+The screen with README / index.html is just the code locker.
+Clicking `index.html` there shows source code. It will not launch the table.
+
+## How to play (easiest)
+
+1. Green **Code** button
+2. **Download ZIP**
+3. Unzip
+4. Double-click `index.html`
+5. It opens in Chrome
+6. Click **PLAY**
+7. Drag back from the cannon, release to fire
 
 ## Controls
-- Drag back from the cannon, release to fire
-- Retry / Skip if a table stalls
-
-## Stack
-Browser only. Three.js + cannon.js. No Unity / Godot required for this prototype.
-
-## Status
-Playable 8-level vertical slice. Next: juicier breaks, sound, more tables, then Unity only if we ship to the stores.
+- Drag left/right to aim
+- Drag farther back for more power
+- Knock every prop off the table
+- **RETRY** if you run out of shots
+- **SKIP LEVEL** if a table stalls
