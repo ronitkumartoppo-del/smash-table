@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Smash Table</title>
+  <style>
+    :root {
+      --ink: #0b1f3a;
+      --teal: #0e7c7b;
+      --gold: #e8b84a;
+      --cream: #f4efe4;
+      --danger: #c44536;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%; overflow: hidden;
+      background: #0b1f3a;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--cream);
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    #c { display: block; width: 100%; height: 100%; }
+    #hud {
+      position: fixed; inset: 0; pointer-events: none;
+      display: flex; flex-direction: column;
+    }
+    header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 14px 16px 0;
+    }
+    .brand { letter-spacing: 0.18em; font-size: 13px; opacity: 0.85; }
+    .brand b { display: block; font-size: 22px; letter-spacing: 0.08em; color: #fff; }
+    .stat {
+      text-align: right; background: rgba(11,31,58,0.55);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 8px 12px; border-radius: 12px; min-width: 118px;
+    }
+    .stat span { display: block; font-size: 11px; letter-spacing: 0.14em; opacity: 0.7; }
+    .stat strong { font-size: 22px; }
+    #ammo {
+      display: flex; gap: 6px; justify-content: center; padding: 8px;
+    }
+    .shot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: #e8b84a; box-shadow: 0 0 8px #e8b84a88;
+    }
+    .shot.off { background: #3a4a5c; box-shadow: none; }
+    #hint {
+      text-align: center; font-size: 14px; letter-spacing: 0.06em;
+      opacity: 0.9; text-shadow: 0 2px 8px #000;
+      padding: 0 16px;
+    }
+    #toast {
+      position: absolute; left: 50%; top: 38%;
+      transform: translate(-50%, -50%);
+      font-size: 42px; font-weight: 800; letter-spacing: 0.04em;
+      text-shadow: 0 6px 24px #000; opacity: 0; pointer-events: none;
+    }
+    footer {
+      margin-top: auto; display: flex; justify-content: center; gap: 10px;
+      padding: 0 16px 18px; pointer-events: auto;
+    }
+    button {
+      pointer-events: auto;
+      background: rgba(11,31,58,0.75);
+      color: var(--cream);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      padding: 10px 18px;
+      font: 600 14px "Trebuchet MS", sans-serif;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+    }
+    button.primary { background: #0e7c7b; border-color: #19a3a1; }
+    button:active { transform: scale(0.97); }
+    #overlay {
+      position: fixed; inset: 0;
+      background: radial-gradient(circle at 50% 30%, #16375e 0%, #071320 70%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 24px; gap: 14px; z-index: 5;
+    }
+    #overlay h1 {
+      font-size: clamp(36px, 8vw, 64px);
+      letter-spacing: 0.06em;
+    }
+    #overlay p { max-width: 420px; opacity: 0.85; line-height: 1.45; }
+    #overlay.hidden { display: none; }
+    .pills { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 6px 0 10px; }
+    .pill {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div id="hud">
+    <header>
+      <div class="brand">LOW-POLY PHYSICS APP<b>SMASH TABLE</b></div>
+      <div class="stat"><span>LEVEL / SCORE</span><strong id="meta">1 / 0</strong></div>
+    </header>
+    <div id="ammo"></div>
+    <div id="hint">Drag back from the cannon, release to fire</div>
+    <div id="toast"></div>
+    <footer>
+      <button id="btnReset">RETRY</button>
+      <button id="btnSkip">SKIP LEVEL</button>
+    </footer>
+  </div>
+  <div id="overlay">
+    <div class="pills"><span class="pill">No Unity required</span><span class="pill">Browser prototype</span><span class="pill">8 tables</span></div>
+    <h1>SMASH TABLE</h1>
+    <p>Aim the cannon. Knock every prop off the table. Glass shatters, wood splits, metal is heavy, stone barely budges.</p>
+    <button class="primary" id="btnStart">PLAY</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+  <script src="game.js"></script>
+
+</body>
+</html>
